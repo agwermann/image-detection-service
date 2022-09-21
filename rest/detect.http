@@ -1,0 +1,14 @@
+POST http://localhost:8080/ HTTP/1.1
+Content-Type: application/json
+ce-specversion: 1.0
+ce-type: cloudEvent
+ce-source: vscode
+ce-id: 123
+ce-time: 2021-10-16T18:54:04.924Z
+
+{
+    "123": "123",
+    "timestamp": "2021-11-21T01:00:00.000000",
+    "priority": 1,
+    "message": "123123123123"
+}
