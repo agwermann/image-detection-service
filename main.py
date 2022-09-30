@@ -57,7 +57,11 @@ def home():
     cloud_event = CloudEventService()
     event = cloud_event.receive_message(request)
 
-    mqtt_client.publish(json.dumps(event.data))
+    img_data = base64.b64decode(event.data['image'])
+    img = Image.open(io.BytesIO(img_data))
+    result = object_detection.detect(img)
+
+    #mqtt_client.publish(json.dumps(event.data))
     
     # Process event
 
@@ -78,6 +82,8 @@ def home():
         # f"Now: {now} -"
         f"Latency: {latency}"
     )
+
+    app.logger.info(result)
 
     #base64_message = event.data['image']
     #base64_bytes = base64_message.encode('ascii')
