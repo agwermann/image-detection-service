@@ -1,4 +1,4 @@
-FROM python:3.8.3-alpine
+FROM python:alpine3.8
 COPY . /app
 WORKDIR /app
 RUN apk --update add python py-pip openssl ca-certificates py-openssl wget
@@ -7,4 +7,4 @@ RUN apk --update add --virtual build-dependencies libffi-dev openssl-dev python-
   && pip install -r requirements.txt \
   && apk del build-dependencies
 EXPOSE 8080
-ENTRYPOINT [ "python", "main.py" ]
+ENTRYPOINT [ "python3", "main.py" ]
