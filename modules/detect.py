@@ -4,7 +4,7 @@ import torch
 class ObjectDetection():
 
     def __init__(self):
-        self.model = torch.hub.load('ultralytics/yolov5', 'custom', path='../resources/yolov5s.pt')
+        self.model = torch.hub.load('ultralytics/yolov5', 'custom', path='../resources/yolov5s.pt', force_reload=True)
 
     def detect(self, imgs):
         # Inference
