@@ -61,7 +61,12 @@ def home():
     img = Image.open(io.BytesIO(img_data))
     result = object_detection.detect(img)
 
-    #mqtt_client.publish(json.dumps(event.data))
+    image_bytes_size = len(event.data['image'])
+    
+    del event.data['image']
+    event.data['result'] = result
+
+    mqtt_client.publish(json.dumps(event.data))
     
     # Process event
 
@@ -77,7 +82,7 @@ def home():
     app.logger.info(
         f"Event Priority: {event.data['priority']} | "
         # f"Data Content: {event.data['message']} bytes | "
-        f"Data Length: {len(event.data['image'])} bytes | "
+        f"Data Length: {image_bytes_size} bytes | "
         # f"Sent time: {sent_datetime} -"
         # f"Now: {now} -"
         f"Latency: {latency}"
