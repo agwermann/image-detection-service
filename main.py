@@ -54,6 +54,8 @@ def detect():
 @app.route("/", methods=["POST"])
 def home():
 
+    start_time = datetime.datetime.now()
+
     cloud_event = CloudEventService()
     event = cloud_event.receive_message(request)
 
@@ -65,6 +67,10 @@ def home():
     
     del event.data['image']
     event.data['result'] = result
+
+    end_time = datetime.datetime.now()
+
+    event.data["processing_time"] = str(end_time - start_time)
 
     mqtt_client.publish(json.dumps(event.data))
     
