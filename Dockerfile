@@ -12,7 +12,7 @@ RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 RUN pip install --upgrade pip setuptools wheel
-RUN pip install torch==1.12.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
+RUN pip install torch==1.7.1+cpu torchvision==0.8.2+cpu -f https://download.pytorch.org/whl/torch_stable.html
 RUN pip install -r requirements.txt
 
 # Setup and start app
